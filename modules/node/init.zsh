@@ -12,6 +12,7 @@
 local_nodenv_paths=({$NODENV_ROOT,{$XDG_CONFIG_HOME/,$HOME/.}nodenv}/bin/nodenv(N))
 local_nvm_paths=({$NVM_DIR,{$XDG_CONFIG_HOME/,$HOME/.}nvm}/nvm.sh(N))
 
+function load_nvm() {
 # Load manually installed or package manager installed nodenv into the shell
 # session.
 if (( $#local_nodenv_paths || $+commands[nodenv] )); then
@@ -61,7 +62,10 @@ if ! zstyle -t ':prezto:module:node:alias' skip; then
   alias npmu='npm update'
   alias npmx='npm uninstall'
 
-  alias npmci='npm ci'
-  alias npmcit='npm cit'
-  alias npmit='npm it'
 fi
+alias npmci='npm ci'
+alias npmcit='npm cit'
+alias npmit='npm it'
+}
+
+lazy_load load_nvm nvm node npm gulp eslint yarn standard react-native npx prisma prettier
