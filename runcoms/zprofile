@@ -86,3 +86,9 @@ function is_mac {
 }
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+if is_mac
+then
+  # Adds homebrew installed python to path
+  export PATH=/usr/local/opt/python/libexec/bin:$PATH
+fi
