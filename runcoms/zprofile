@@ -72,4 +72,17 @@ if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
+# Tests for distro-specific tools (e.g. package managers)
+function is_arch {
+  [ -f "/etc/arch-release" ]
+}
+
+function is_centos {
+  [ -f "/etc/centos-release" ]
+}
+
+function is_mac {
+  [ "$(uname -s)" = "Darwin" ]
+}
+
 export PATH="$HOME/.poetry/bin:$PATH"
