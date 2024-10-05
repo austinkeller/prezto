@@ -85,10 +85,20 @@ function is_mac {
   [ "$(uname -s)" = "Darwin" ]
 }
 
+#
+# Add paths to PATH.
+#
 export PATH="$HOME/.poetry/bin:$PATH"
+
+if [[ -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]]; then
+  source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+  export NIX_PATH="$HOME/.nix-defexpr"
+fi
 
 if is_mac
 then
+  # Set PATH, MANPATH, etc., for Homebrew.
+  eval "$(/opt/homebrew/bin/brew shellenv)"
   # Adds homebrew installed python to path
   export PATH=/usr/local/opt/python/libexec/bin:$PATH
 fi
